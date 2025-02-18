@@ -7,7 +7,6 @@ import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import { TaskContextProvider } from "./context/TaskContext";
 import Navbar from "./components/Navbar";
-//import { TaskContextProvider } from "./context/TaskContext";
 //import { AuthProvider } from "./context/AuthContext";
 
 function App() {
@@ -15,11 +14,11 @@ function App() {
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((_event, session) => {
-      if (!session) {
-        navigate("/login");
-      } else {
+      //if (!session) {
+        navigate("/"); //login
+      /*} else {
         navigate("/");
-      }
+      }*/
     });
   }, [navigate]);
 
@@ -28,8 +27,8 @@ function App() {
       {/*<Navbar/>*/}
       <div className="container">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          {/*<Route path="/" element={<Home />} />*/}
+          <Route path="/" element={<Login />} /> {/*login*/}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
