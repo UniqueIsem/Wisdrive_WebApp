@@ -14,12 +14,14 @@ function App() {
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((_event, session) => {
-      //if (!session) {
-        navigate("/"); //login
-      /*} else {
+      if (!session) {
+        navigate("/login"); 
+      } else {
         navigate("/");
-      }*/
+      }
     });
+
+    
   }, [navigate]);
 
   return (
@@ -27,8 +29,8 @@ function App() {
       {/*<Navbar/>*/}
       <div className="container">
         <Routes>
-          {/*<Route path="/" element={<Home />} />*/}
-          <Route path="/" element={<Login />} /> {/*login*/}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

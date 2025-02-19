@@ -10,14 +10,24 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //stop update of page when sending forms
     loginWithMagicLink(email);
   };
 
   useEffect(() => {
-    if (supabase.auth.getUser()) {
-      navigate("/");
-    }
+    const checkUser = async () => {
+      //const { data: user } = await supabase.auth.getUser();
+      const { data, error } = await supabase.auth.getSession();
+      if (error) {
+        console.log("Error obteniendo sesion: ", error);
+      }
+
+      if (data.session) { //user on parameter
+        navigate("/");
+      }
+    };
+
+    checkUser();
     console.log("called");
   }, [navigate]);
 
