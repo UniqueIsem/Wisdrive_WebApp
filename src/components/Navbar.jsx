@@ -1,37 +1,46 @@
 import { useAuth } from "../context/AuthContext";
 import { useTasks } from "../context/TaskContext";
-import { Link } from "react-router-dom";
+import { supabase } from "../supabase/client";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const { logout } = useTasks();
-  const { user } = useAuth()
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Error al cerrar sesión:", error.message);
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
-      <div className="container">
-        <Link className="navbar-brand" to="/">Supabase React</Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        {user && (
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="#!" onClick={() => logout()}>
-                  Logout
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
+    <nav className="gradient-bg w-1/5 text-white ">
+      <div className="h-full flex flex-col mx-auto justify-between items-center py-5 p-0">
+        {/* ImageButton */}
+        <div className="w-full mb-8 p-3">
+          <Link to="/">
+            <img
+              src="src\assets\logo\word-logo.png"
+              alt="wisdrive-word-logo"
+            />
+          </Link>
+        </div>
+
+        {/* Menú de navegación */}
+        <div className="md:flex space-x-4">
+
+          <button
+            className="bg-transparet hover:bg-red-700 hover:cursor-pointer text-white py-1 px-4 rounded"
+            onClick={() => handleLogout()}
+          >
+            Cerrar sesión
+          </button>
+        </div>
       </div>
     </nav>
   );

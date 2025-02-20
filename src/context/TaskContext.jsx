@@ -16,36 +16,48 @@ export const TaskContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
 
-  const loginWithMagicLink = async (email) => {
+  const loginWithMagicLink = async (email, navigate) => {
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithOtp({ email: email });
+      // 1. Intentar iniciar sesión o registrarse con el Magic Link
+      const { error } = await supabase.auth.signInWithOtp({ email });
       if (error) {
         throw error;
       }
-      alert("check your email for the magic link");
+  
+      // 2. Verificar si el usuario ya está autenticado
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError) {
+        throw userError;
+      }
+  
+      // 3. Si el usuario ya existe, redirigir al Home
+      if (userData?.user) {
+        navigate("/");
+      } else {
+        // 4. Si no, pedirle que revise su correo para completar el registro
+        alert("Correo no registrado\nRevisa tu correo para registrarte.");
+      }
     } catch (error) {
       alert(error.message);
     } finally {
       setLoading(false);
     }
-  };
+  };  
 
-  const logout = async () => {
+ const logout = async () => {
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        throw error;
-      }
+      await supabase.auth.signOut();
     } catch (error) {
+      console.error("Error al cerrar sesión: ", error.message);
       alert(error.error_description || error.message);
     } finally {
       setLoading(false);
     }
   };
 
-  const createTask = async (taskName) => {
+/*  const createTask = async (taskName) => {
     setAdding(true);
     try {
       const user = supabase.auth.getUser();
@@ -129,15 +141,16 @@ export const TaskContextProvider = ({ children }) => {
       alert(error.error_description || error.message);
     }
   };
+  */
 
   return (
     <TaskContext.Provider
       value={{
         tasks,
-        getTasks,
+        /*getTasks,
         createTask,
         updateTasks,
-        deleteTask,
+        deleteTask,*/
         loading,
         adding,
         loginWithMagicLink,
