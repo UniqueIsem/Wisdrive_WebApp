@@ -1,8 +1,8 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { supabase } from "./supabase/client";
-import { useEffect } from "react";
 import Home from './pages/HomePage'
 import Login from './pages/LoginPage';
+import { Signin } from "./components/auth/Signin";
+import { Signup } from "./components/auth/Signup";
 import NotFound from './pages/NotFound';
 import { QuizGenerator } from "./components/screens/QuizGenerator";
 import { Restfull } from "./components/screens/Restfull";
@@ -12,38 +12,20 @@ import { AuthProvider } from "./context/AuthContext";
 
 function App() {
 
-  const useAuthRedirect = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      const checkSession = async () => {
-        const { data, error } = await supabase.auth.getSession();
-        if (error) {
-          console.error("Error obteniendo la sesión: ", error);
-          return;
-        }
-
-        if (data.session) {
-          navigate("/"); // Redirige al Home si hay una sesión activa
-        }
-      };
-
-      checkSession();
-    }, [navigate]);
-  };
-  useAuthRedirect();
-
-
   return (
     <AuthProvider>
       <TaskContextProvider>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />}>
+            <Route path="/quiz-generator" element={<QuizGenerator />} />
+            <Route path="/restfull" element={<Restfull />} />
+            <Route path="/tables" element={<Tables />} />
+          </Route>
+          <Route path="/login" element={<Login />}>
+            <Route path="/login/signin" element={<Signin />} />
+            <Route path="/login/signup" element={<Signup />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
-          <Route path="/quiz-generator" element={<QuizGenerator />} />
-          <Route path="/restfull" element={<Restfull />} />
-          <Route path="/tables" element={<Tables />} />
         </Routes>
       </TaskContextProvider>
     </AuthProvider>

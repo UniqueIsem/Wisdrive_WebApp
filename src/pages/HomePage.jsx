@@ -1,71 +1,45 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { supabase } from "../supabase/client";
 import Navbar from "../components/Navbar";
-import { QuizGenerator } from "../components/screens/QuizGenerator";
-import { Restfull } from "../components/screens/Restfull";
-import { Tables } from "../components/screens/Tables";
 
-function Home() {
+function HomePage() {
   const navigate = useNavigate();
-  const [showTasksDone, setShowTasksDone] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkUser = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (error) {
         console.error("Error obteniendo sesión:", error);
+        setIsLoading(false);
       }
-      if (!data.session) {
-        navigate("/login");
-      }
+      !data.session ? navigate("/login") : setIsLoading(false);
     };
 
     checkUser();
   }, [navigate]);
 
-  const handleNavbarSelection = (component) => {
-    setSelectedComponent(component);
-  };
-
-  let ComponentToRender;
-  // Dependiendo del estado, cargamos el componente adecuado
-  if (selectedComponent === 'quiz-generator') {
-    ComponentToRender = <QuizGenerator />;
-  } else if (selectedComponent === 'restfull') {
-    ComponentToRender = <Restfull />;
-  } else if (selectedComponent === 'tables') {
-    ComponentToRender = <Tables />;
-  } else {
-    ComponentToRender = (
-      <div>
-        <h2>Bienvenido a la página principal</h2>
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen w-screen">
+        <div className="bg-transparent m-20">
+          <p className="gradient-bg p-16 rounded-2xl text-3xl font-bold">
+            Cargando...
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex h-screen w-screen">
-      <Navbar onSelect={handleNavbarSelection} />
-      <div className="row h-screen w-screen justify-items-center">
-        <div className="col-md-4 offset-md-4 mt-16">
-
-          <header className="d-flex justify-content-between my-3">
-            <span className="h5">{showTasksDone ? `Done Tasks` : "Tasks"}</span>
-            <button
-              onClick={() => setShowTasksDone(!showTasksDone)}
-              className="btn btn-dark btn-sm hover:cursor-pointer bg-green-600 rounded-2xl p-2 m-2"
-            >
-              {showTasksDone ? "Show tasks to do" : "Show tasks done"}
-            </button>
-
-          </header>
-          {ComponentToRender}
-        </div>
+    <div className="flex h-screen w-auto">
+      <Navbar />
+      <div className="w-4/5 p-8">
+        <Outlet />
       </div>
     </div>
   );
 }
 
-export default Home;
+export default HomePage;
