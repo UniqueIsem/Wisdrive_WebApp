@@ -9,7 +9,8 @@ module.exports = {
         blackPurple: "#150016",
         deepPurple: "#29104A",
         purple: "#522C5D",
-        white: "#FFE3D8",
+        whiteCream: "#FFE3D8",
+        grayCream: "#e0c7bc",
         royalPurple: "#76007C",
         violet: "#9747FF",
 

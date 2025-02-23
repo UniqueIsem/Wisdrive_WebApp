@@ -1,6 +1,3 @@
-// Refactor LoginPage to support Email and Password Authentication
-// Added toggle functionality between Signin and Signup components
-
 import React, { useState } from 'react';
 import { Signin } from '../components/auth/Signin';
 import { Signup } from '../components/auth/Signup';
@@ -9,7 +6,7 @@ const LoginPage = () => {
   const [isSignin, setIsSignin] = useState(true);
 
   return (
-    <div className="white-bg flex h-screen w-screen">
+    <div className="bg-gray-800 flex h-screen w-screen">
       {/*SECCION IZQUIERDA*/}
       <div className="login-img-bg overlay-gradient w-1/2 flex items-center justify-center">
         <div className="text-white text-center place-items-center p-10">
@@ -20,8 +17,8 @@ const LoginPage = () => {
       </div>
 
       {/*SECCION DERECHA*/}
-      <div className="w-1/2 flex flex-col items-center justify-center">
-        <div className='white-bg p-10 place-items-center border rounded-4xl shadow-[0px_0px_15px_5px_rgba(0,0,0,0.4)]'>
+      <div className="white-100 w-1/2 flex flex-col items-center justify-center">
+        <div className='white-bg p-10 place-items-center rounded-4xl shadow-[0px_0px_15px_5px_rgba(0,0,0,0.3)]'>
           <h2 className="text-4xl font-bold mb-3 text-gray-800">{isSignin ? 'Inicia Sesión' : 'Registrate'}</h2>
           {isSignin ? <Signin /> : <Signup />}
           <p className="center text-gray-800">

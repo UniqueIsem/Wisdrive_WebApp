@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Restfull = () => {
   return (
-    <div>
+    <div className="h-screen">
       <h1>Restfull Methods</h1>
       <ul>
         <li>GET</li>
