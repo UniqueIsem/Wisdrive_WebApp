@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase/client";
 import Navbar from "../components/Navbar";
+import { QuizGenerator } from "../components/screens/QuizGenerator";
+import { Restfull } from "../components/screens/Restfull";
+import { Tables } from "../components/screens/Tables";
 
 function Home() {
   const navigate = useNavigate();
@@ -22,9 +25,29 @@ function Home() {
     checkUser();
   }, [navigate]);
 
+  const handleNavbarSelection = (component) => {
+    setSelectedComponent(component);
+  };
+
+  let ComponentToRender;
+  // Dependiendo del estado, cargamos el componente adecuado
+  if (selectedComponent === 'quiz-generator') {
+    ComponentToRender = <QuizGenerator />;
+  } else if (selectedComponent === 'restfull') {
+    ComponentToRender = <Restfull />;
+  } else if (selectedComponent === 'tables') {
+    ComponentToRender = <Tables />;
+  } else {
+    ComponentToRender = (
+      <div>
+        <h2>Bienvenido a la página principal</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-screen w-screen">
-      <Navbar />
+      <Navbar onSelect={handleNavbarSelection} />
       <div className="row h-screen w-screen justify-items-center">
         <div className="col-md-4 offset-md-4 mt-16">
 
@@ -38,8 +61,7 @@ function Home() {
             </button>
 
           </header>
-
-
+          {ComponentToRender}
         </div>
       </div>
     </div>

@@ -4,7 +4,8 @@ import { supabase } from "../supabase/client";
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
-  const { logout } = useTasks();
+  const { logout } = useTas
+  ks();
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -33,14 +34,27 @@ function Navbar() {
 
         {/* Menú de navegación */}
         <div className="md:flex space-x-4">
-
-          <button
-            className="bg-transparet hover:bg-red-700 hover:cursor-pointer text-white py-1 px-4 rounded"
-            onClick={() => handleLogout()}
-          >
-            Cerrar sesión
-          </button>
+          <nav className="p-4">
+            <ul className="flex flex-col justify-around text-white">
+              <li>
+                <Link to="/quiz-generator" className="">Quiz Generator</Link>
+              </li>
+              <li>
+                <Link to="/restfull" className="hover:underline">Restfull</Link>
+              </li>
+              <li>
+                <Link to="/tables" className="hover:underline">Tables</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
+
+        <button
+          className="bg-transparet hover:bg-red-700 hover:cursor-pointer text-white py-1 px-4 rounded"
+          onClick={() => handleLogout()}
+        >
+          Cerrar sesión
+        </button>
       </div>
     </nav>
   );
