@@ -1,28 +1,17 @@
-import { useEffect } from "react";
-import { supabase } from "../supabase/client";
-import { useNavigate } from "react-router-dom";
-import Signin from "../components/Signin";
+// Refactor LoginPage to support Email and Password Authentication
+// Added toggle functionality between Signin and Signup components
 
-function Login() {
-  const navigate = useNavigate();
+import React, { useState } from 'react';
+import { Signin } from '../components/auth/Signin';
+import { Signup } from '../components/auth/Signup';
 
-  useEffect(() => {
-    const checkUser = async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (error) alert("Error obteniendo sesión:", error);
-
-      if (data.session) {
-        navigate("/");
-      }
-    };
-
-    checkUser();
-  }, [navigate]);
+const LoginPage = () => {
+  const [isSignin, setIsSignin] = useState(true);
 
   return (
-    <div className="flex h-screen w-screen">
+    <div className="white-bg flex h-screen w-screen">
       {/*SECCION IZQUIERDA*/}
-      <div className="gradient-bg w-1/2 flex items-center justify-center">
+      <div className="login-img-bg overlay-gradient w-1/2 flex items-center justify-center">
         <div className="text-white text-center place-items-center p-10">
           <img className="mb-4" src="src\assets\logo\full-logo.png" alt="wisdrive-letter-logo" width={200} />
           <h1 className="text-4xl font-bold mb-4">Bienvenido al admin panel</h1>
@@ -31,11 +20,24 @@ function Login() {
       </div>
 
       {/*SECCION DERECHA*/}
-      <div className="w-1/2 bg-gray-900 flex items-center justify-center">
-        <Signin/>
+      <div className="w-1/2 flex flex-col items-center justify-center">
+        <div className='white-bg p-10 place-items-center border rounded-4xl shadow-[0px_0px_15px_5px_rgba(0,0,0,0.4)]'>
+          <h2 className="text-4xl font-bold mb-3 text-gray-800">{isSignin ? 'Inicia Sesión' : 'Registrate'}</h2>
+          {isSignin ? <Signin /> : <Signup />}
+          <p className="center text-gray-800">
+            {isSignin ? 'No tienes cuenta? ' : 'Ya tienes cuenta? '}
+            <button
+              onClick={() => setIsSignin(!isSignin)}
+              className="text-blue-500 hover:underline hover:text-purple-800"
+            >
+              {isSignin ? 'Regístrate' : 'Inicia sesión'}
+            </button>
+          </p>
+        </div>
       </div>
     </div>
-  );
-}
 
-export default Login;
+  );
+};
+
+export default LoginPage;
