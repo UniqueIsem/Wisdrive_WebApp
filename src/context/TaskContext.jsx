@@ -20,17 +20,17 @@ export const TaskContextProvider = ({ children }) => {
     setLoading(true);
     try {
       // 1. Intentar iniciar sesión o registrarse con el Magic Link
-      const { error } = await supabase.auth.signInWithOtp({ email });
+      const { error } = await supabase.auth.signInWithOtp({ email: email, shouldCreateUser: false, emailRedirectTo: "/"});
       if (error) {
         throw error;
       }
-  
+
       // 2. Verificar si el usuario ya está autenticado
       const { data: userData, error: userError } = await supabase.auth.getUser();
       if (userError) {
         throw userError;
       }
-  
+
       // 3. Si el usuario ya existe, redirigir al Home
       if (userData?.user) {
         navigate("/");
@@ -43,9 +43,9 @@ export const TaskContextProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };  
+  };
 
- const logout = async () => {
+  const logout = async () => {
     setLoading(true);
     try {
       await supabase.auth.signOut();
@@ -57,91 +57,91 @@ export const TaskContextProvider = ({ children }) => {
     }
   };
 
-/*  const createTask = async (taskName) => {
-    setAdding(true);
-    try {
+  /*  const createTask = async (taskName) => {
+      setAdding(true);
+      try {
+        const user = supabase.auth.getUser();
+  
+        const { error, data } = await supabase.from("tasks").insert({
+          name: taskName,
+          userId: user.id,
+        });
+  
+        setTasks([...tasks, ...data]);
+  
+        if (error) {
+          throw error;
+        }
+      } catch (error) {
+        alert(error.error_description || error.message);
+      } finally {
+        setAdding(false);
+      }
+    };
+  
+    const getTasks = async (done = false) => {
+      setLoading(true);
+  
       const user = supabase.auth.getUser();
-
-      const { error, data } = await supabase.from("tasks").insert({
-        name: taskName,
-        userId: user.id,
-      });
-
-      setTasks([...tasks, ...data]);
-
-      if (error) {
-        throw error;
+  
+      try {
+        const { error, data } = await supabase
+          .from("tasks")
+          .select("id, name, done")
+          .eq("userId", user.id)
+          .eq("done", done)
+          .order("id", { ascending: false });
+  
+        if (error) {
+          throw error;
+        }
+  
+        setTasks(data);
+      } catch (error) {
+        alert(error.error_description || error.message);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      alert(error.error_description || error.message);
-    } finally {
-      setAdding(false);
-    }
-  };
-
-  const getTasks = async (done = false) => {
-    setLoading(true);
-
-    const user = supabase.auth.getUser();
-
-    try {
-      const { error, data } = await supabase
-        .from("tasks")
-        .select("id, name, done")
-        .eq("userId", user.id)
-        .eq("done", done)
-        .order("id", { ascending: false });
-
-      if (error) {
-        throw error;
+    };
+  
+    const updateTasks = async (id, updatedFields) => {
+      try {
+        const user = supabase.auth.getUser();
+        const { error, data } = await supabase
+          .from("tasks")
+          .update(updatedFields)
+          .eq("userId", user.id)
+          .eq("id", id);
+        if (error) {
+          throw error;
+        }
+  
+        setTasks(tasks.filter((task) => task.id !== data[0].id));
+      } catch (error) {
+        alert(error.error_description || error.message);
       }
-
-      setTasks(data);
-    } catch (error) {
-      alert(error.error_description || error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const updateTasks = async (id, updatedFields) => {
-    try {
-      const user = supabase.auth.getUser();
-      const { error, data } = await supabase
-        .from("tasks")
-        .update(updatedFields)
-        .eq("userId", user.id)
-        .eq("id", id);
-      if (error) {
-        throw error;
+    };
+  
+    const deleteTask = async (id) => {
+      try {
+        const user = supabase.auth.user();
+  
+        const { error, data } = await supabase
+          .from("tasks")
+          .delete()
+          .eq("userId", user.id)
+          .eq("id", id);
+  
+        if (error) {
+          throw error;
+        }
+  
+        setTasks(tasks.filter((task) => task.id !== data[0].id));
+      } catch (error) {
+        alert(error.error_description || error.message);
       }
-
-      setTasks(tasks.filter((task) => task.id !== data[0].id));
-    } catch (error) {
-      alert(error.error_description || error.message);
-    }
-  };
-
-  const deleteTask = async (id) => {
-    try {
-      const user = supabase.auth.user();
-
-      const { error, data } = await supabase
-        .from("tasks")
-        .delete()
-        .eq("userId", user.id)
-        .eq("id", id);
-
-      if (error) {
-        throw error;
-      }
-
-      setTasks(tasks.filter((task) => task.id !== data[0].id));
-    } catch (error) {
-      alert(error.error_description || error.message);
-    }
-  };
-  */
+    };
+    */
 
   return (
     <TaskContext.Provider
