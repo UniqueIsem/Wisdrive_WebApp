@@ -17,8 +17,8 @@ const LoginPage = () => {
       </div>
 
       {/*SECCION DERECHA*/}
-      <div className="white-100 w-1/2 flex flex-col items-center justify-center">
-        <div className='white-bg p-10 place-items-center rounded-4xl shadow-[0px_0px_15px_5px_rgba(0,0,0,0.3)]'>
+      <div className="bg-purple-300 w-1/2 flex flex-col items-center justify-center">
+        <div className='bg-purple-200 p-10 place-items-center rounded-4xl shadow-[0px_0px_15px_5px_rgba(0,0,0,0.3)]'>
           <h2 className="text-4xl font-bold mb-3 text-gray-800">{isSignin ? 'Inicia Sesión' : 'Registrate'}</h2>
           {isSignin ? <Signin /> : <Signup />}
           <p className="center text-gray-800">

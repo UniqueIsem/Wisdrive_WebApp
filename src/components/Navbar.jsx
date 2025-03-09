@@ -44,7 +44,7 @@ function Navbar() {
                   to="/restfull"
                   className="transition delay-150 duration-300 ease-in-out transform hover:text-xl"
                 >
-                  Restfull
+                  Lists
                 </Link>
               </li>
               <li>
@@ -60,7 +60,7 @@ function Navbar() {
         </div>
 
         <button
-          className="bg-transparet hover:bg-red-700 hover:cursor-pointer text-white py-1 px-4 rounded transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
+          className="bg-transparet hover:bg-purple-700 hover:cursor-pointer text-white py-1 px-4 rounded transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
           onClick={() => handleLogout()}
         >
           Cerrar sesión
