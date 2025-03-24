@@ -36,15 +36,15 @@ function Navbar() {
                   to="/quiz-generator"
                   className="transition delay-150 duration-300 ease-in-out transform hover:text-xl"
                 >
-                  Quiz Generator
+                  Generador Quizzes
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/restfull"
+                  to="/create_quizz"
                   className="transition delay-150 duration-300 ease-in-out transform hover:text-xl"
                 >
-                  Lists
+                  Crear quizz
                 </Link>
               </li>
               <li>
@@ -52,7 +52,7 @@ function Navbar() {
                   to="/tables"
                   className="transition delay-150 duration-300 ease-in-out transform hover:text-xl"
                 >
-                  Tables
+                  Contenido
                 </Link>
               </li>
             </ul>
