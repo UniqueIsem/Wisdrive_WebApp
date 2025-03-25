@@ -32,7 +32,7 @@ export function Tables_Modules () {
   };
 
   return (
-    <div className="flex flex-col h-full bg-purple-100 p-8">
+    <div className="flex flex-col h-full bg-purple-100 p-8 ">
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">
         Navega por el contenido de la app
       </h1>
@@ -47,7 +47,7 @@ export function Tables_Modules () {
           <div 
             key={module.module_id} 
             className="bg-white w-full p-4 mb-4 rounded-lg shadow"
-            onClick={() => navigate(`/modules_quizzes/${module.module_id}`)}
+            onClick={() => navigate(`/modules_quizzes/${module.id}`)}
           >
             <p className="text-gray-700 mt-10 text-center">{module.module_name}</p>
           </div>

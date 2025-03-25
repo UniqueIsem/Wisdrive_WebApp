@@ -18,7 +18,7 @@ export function QuizGenerator() {
   };
 
   return (
-    <div className="flex flex-col items-center p-8 bg-purple-100 min-h-full">
+    <div className="flex flex-col items-center p-8 bg-purple-100 h-full">
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">
         Generar quiz con Chat PDF
       </h1>

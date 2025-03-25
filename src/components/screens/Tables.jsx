@@ -35,7 +35,7 @@ export function Tables() {
           <div 
           key={category.category_id} 
           className="bg-white w-1/3 p-4 rounded-lg shadow justify-items-center content-center"
-          onClick={() => navigate(`/tables_modules/${category.category_id}`)}
+          onClick={() => navigate(`/tables_modules/${category.id}`)}
         >
             {/*img src={category.image} alt={category.title} className="w-full h-auto" />*/}
             <p className="text-gray-400 mt-10 text-center">{category.name}</p>

@@ -35,7 +35,7 @@ function HomePage() {
   return (
     <div className="flex h-screen w-auto">
       <Navbar />
-      <div className="w-4/5 p-8">
+      <div className="w-4/5 ml-[20%]">
         <Outlet />
       </div>
     </div>

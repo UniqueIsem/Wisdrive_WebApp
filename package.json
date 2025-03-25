@@ -13,6 +13,7 @@
     "@supabase/supabase-js": "^2.48.1",
     "@tailwindcss/vite": "^4.0.6",
     "autoprefixer": "^10.4.20",
+    "axios": "^1.8.4",
     "clsx": "^2.1.1",
     "lucide-react": "^0.476.0",
     "react": "^19.0.0",

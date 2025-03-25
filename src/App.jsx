@@ -11,7 +11,10 @@ import { Tables } from "./components/screens/Tables";
 import { Tables_Modules } from "./components/screens/Tables_Modules";
 import { Modules_Quizzes } from "./components/screens/Modules_Quizzes";
 import { Quizzes_Questions } from "./components/screens/Quizzes_Questions";
+import { Questions_Answers } from "./components/screens/Questions_Answers";
 import { Create_Quizz } from "./components/screens/Create_Quizz";
+
+import {GeneratorTest } from "./components/screens/GeneratorTest";
 
 import { TaskContextProvider } from "./context/TaskContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -29,7 +32,10 @@ function App() {
             <Route path="/tables_modules/:id" element={<Tables_Modules />} />
             <Route path="/modules_quizzes/:id" element={<Modules_Quizzes />} />
             <Route path="/quizzes_questions/:id" element={<Quizzes_Questions/>} />
+            <Route path="/questions_answers/:id" element={<Questions_Answers/>} />
             <Route path="/create_quizz" element={<Create_Quizz/>} />
+
+            <Route path="/generator-test" element={<GeneratorTest/>} />
           </Route>
           
           <Route path="/login" element={<Login />}>

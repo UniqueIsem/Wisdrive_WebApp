@@ -26,7 +26,7 @@ export function Modules_Quizzes () {
     };
 
     return (
-        <div className="bg-purple-100 p-6 rounded-lg max-w-full mx-auto">
+        <div className="bg-purple-100 p-6 rounded-lg h-full w-full mx-auto">
         <h2 className="text-lg font-semibold text-gray-800">
             Navega por el contenido de la app
         </h2>
@@ -34,15 +34,15 @@ export function Modules_Quizzes () {
         <p className="text-gray-600 mb-4">Módulo: 1</p>
         <div className="border border-purple-300 rounded-lg overflow-hidden">
             <div className="gradient-bg text-gray-800 font-semibold p-3">
-            Todas las preguntas
+            Todos los quizzes
             </div>
             {quizzes.map((quiz) => (
             <div
-                key={quiz.quiz_id}
+                key={quiz.id}
                 className="p-3 border-b border-purple-200 bg-purple-400 hover:bg-gray-600 cursor-pointer"
-                onClick={() => navigate(`/quizzes_questions/${quiz.quiz_id}`)}
+                onClick={() => navigate(`/quizzes_questions/${quiz.id}`)}
             >
-                {quiz.quiz_name}
+                {quiz.name}
             </div>
             ))}
         </div>

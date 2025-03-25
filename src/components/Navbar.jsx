@@ -15,7 +15,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="gradient-bg w-1/5 text-white ">
+    <nav className="fixed top-0 left-0 h-screen gradient-bg w-1/5 text-white ">
       <div className="h-full flex flex-col mx-auto justify-between items-center py-5 p-0">
         {/* Logo */}
         <div className="w-full mb-8 p-3">
@@ -33,7 +33,8 @@ function Navbar() {
             <ul className="flex flex-col items-center space-y-4 text-white text-lg font-bold">
               <li>
                 <Link
-                  to="/quiz-generator"
+                  //to="/quiz-generator"
+                  to="generator-test"
                   className="transition delay-150 duration-300 ease-in-out transform hover:text-xl"
                 >
                   Generador Quizzes
