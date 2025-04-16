@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../supabase/client";
 import { useNavigate } from 'react-router-dom';
+import { Pencil } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
+import { ArrowBigRight } from 'lucide-react';
+
 
 export function Modules_Quizzes () {
     const { id } = useParams(); //Obtiene el ID de la URL
@@ -40,9 +44,11 @@ export function Modules_Quizzes () {
             <div
                 key={quiz.id}
                 className="p-3 border-b border-purple-200 bg-purple-400 hover:bg-gray-600 cursor-pointer"
-                onClick={() => navigate(`/quizzes_questions/${quiz.id}`)}
             >
                 {quiz.name}
+                <button> <Pencil /> </button>
+                <button > <Trash2 /> </button>
+                <button onClick={() => navigate(`/quizzes_questions/${quiz.id}`)}> <ArrowBigRight /> </button>
             </div>
             ))}
         </div>

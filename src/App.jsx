@@ -15,6 +15,7 @@ import { Questions_Answers } from "./components/screens/Questions_Answers";
 import { Create_Quizz } from "./components/screens/Create_Quizz";
 
 import {GeneratorTest } from "./components/screens/GeneratorTest";
+import { Upload_Generated } from "./components/screens/Upload_Generated";
 
 import { TaskContextProvider } from "./context/TaskContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -36,6 +37,7 @@ function App() {
             <Route path="/create_quizz" element={<Create_Quizz/>} />
 
             <Route path="/generator-test" element={<GeneratorTest/>} />
+            <Route path="/generator-test/quiz-preview" element={<Upload_Generated />} />
           </Route>
           
           <Route path="/login" element={<Login />}>

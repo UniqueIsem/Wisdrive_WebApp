@@ -116,9 +116,10 @@ export function Create_Quizz() {
         </div>
         
         <div className="flex justify-between">
+        {/**corregir esta parte a que lo traiga de la bd */}
         <p>Módulo</p>
             <select name="module" onChange={handleChange}>
-            <option value="1">Introduccion</option>
+            <option value="2">Normas Generales y Señales de Tránsito</option>
             <option value="4">Intermedio</option>
             <option value="5">Avanzado</option>
             </select>
