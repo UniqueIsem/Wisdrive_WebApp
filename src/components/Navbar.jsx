@@ -56,6 +56,14 @@ function Navbar() {
                   Contenido
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/videos_management"
+                  className="transition delay-150 duration-300 ease-in-out transform hover:text-xl"
+                >
+                  Videos
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>

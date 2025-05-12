@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase/client';
+import { Drama } from 'lucide-react';
 
 export const Signin = () => {
   const [email, setEmail] = useState('');
@@ -13,11 +14,34 @@ export const Signin = () => {
     e.preventDefault();
     setError('');
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      //alert('Inicio de sesión exitoso!');
-      navigate("/");
-    } catch (error) {
+      const { data: signinData, error: signinError } = await supabase.auth.signInWithPassword({ email, password });
+      if (signinError) throw signinError;
+
+      
+      const userId = signinData?.user?.id;
+      if (!userId) throw new Error('Usuario no encontrado');
+
+      //consultar si es admin
+      const { data: adminData, error: adminError } = await supabase
+        .from('admins')
+        .select('role')
+        .eq('user_id', userId)
+        .single(); 
+
+      if (adminError || !adminData) {
+        await supabase.auth.signOut();
+        setError('Acceso denegado. No eres administrador.');
+        return;
+      }
+
+      if (adminData.role !== 'admin') {
+        await supabase.auth.signOut();
+        setError('Acceso denegado. Rol no permitido.');
+        return;
+      }
+
+      // si sí es admin, navega
+      navigate('/');    } catch (error) {
       setError(error.message);
     }
   };
