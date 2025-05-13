@@ -4,6 +4,7 @@ import { supabase } from "../../supabase/client";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { EditableInput } from "../ui/EditableInput";
 
 export function GeneratorTest() {
   const [question, setQuestion] = useState(
@@ -20,6 +21,9 @@ export function GeneratorTest() {
   const [sourceId, setSourceId] = useState(null);
   const [consultSourceId, setConsultSourceId] = useState(null);
   const [files, setFiles] = useState([]);
+  //
+  const [pdfUrl, setPdfUrl] = useState(null);
+  const [extraPrompt, setExtraPrompt] = useState("");
 
   useEffect(() => {
     fetchFiles();
@@ -132,7 +136,6 @@ export function GeneratorTest() {
   };
   //
   const handleAsk = async () => {
-    console.log(consultSourceId);
     if (!consultSourceId) {
       setAnswer("Primero selecciona un archivo con sourceId.");
       return;
@@ -140,6 +143,8 @@ export function GeneratorTest() {
 
     setLoading(true);
     setAnswer("");
+
+    const promptToSend = `${question}\n${extraPrompt}`;
 
     try {
       const response = await axios.post(
@@ -149,7 +154,7 @@ export function GeneratorTest() {
           messages: [
             {
               role: "user",
-              content: question,
+              content: promptToSend,
             },
           ],
         },
@@ -183,7 +188,7 @@ export function GeneratorTest() {
   };
 
   return (
-    <div className="flex bg-purple-100 p-6 h-full h-max-full w-full mx-auto space-x-4">
+    <div className="flex bg-purple-100 p-6 w-full mx-auto space-x-4 min-h-screen">
       {/*Subir archivo*/}
       <div className="bg-white p-4 rounded-lg shadow w-1/3">
         <h1 className="text-xl font-semibold text-purple-700 mb-3">
@@ -194,7 +199,10 @@ export function GeneratorTest() {
             <div
               key={file.id}
               className="bg-white w-full p-4 mb-4 rounded-lg shadow cursor-pointer hover:bg-purple-100"
-              onClick={() => setConsultSourceId(file.sourceId)}
+              onClick={() => {
+                setConsultSourceId(file.sourceId);
+                setPdfUrl(file.file_route);
+              }}
             >
               <p className="text-gray-700">{file.file_name}</p>
               {file.source_id && (
@@ -225,16 +233,37 @@ export function GeneratorTest() {
       </div>
 
       {/*Generar quiz*/}
-      <div className="w-2/3 mx-auto mt- p-6 bg-white rounded-lg shadow-md space-y-4">
+      <div className="w-2/3 min-h-screen p-6 bg-white rounded-lg shadow-md space-y-4">
         <h2 className="text-xl font-semibold text-purple-700">
           Generar quiz con PDF
         </h2>
-        <Button
-          onClick={handleAsk}
-          className="bg-purple-700 text-white hover:bg-purple-800"
-        >
-          {loading ? "Generando..." : "Generar"}
-        </Button>
+        <iframe
+          allowFullScreen
+          src={pdfUrl}
+          height="75%"
+          width="100%"
+          title="Iframe Example"
+          className="mb-7"
+        ></iframe>
+        <div className="border-dashed border-2 border-gray-200 p-4 my-2 rounded-md">
+          <p className="text-gray-500">
+            Se generará un quizz de 5 preguntas de opción múltiple.
+          </p>
+          <input
+            className="text-gray-500 w-100 rounded-md bg-purple-100 m-2"
+            type="text"
+            placeholder="Agrega instrucciones adicionales"
+            value={extraPrompt}
+            onChange={(e) => setExtraPrompt(e.target.value)}
+          ></input>
+          <Button
+            onClick={handleAsk}
+            className="bg-purple-700 text-white hover:bg-purple-800"
+          >
+            {loading ? "Generando..." : "Generar"}
+          </Button>
+        </div>
+
         {answer && (
           <div className="mt-4 p-4 bg-gray-100 rounded-lg whitespace-pre-wrap text-gray-800">
             {answer}
@@ -242,12 +271,14 @@ export function GeneratorTest() {
         )}
         {/*onClick={() => navigate("/generator-test/quiz-preview", { state: { quizData: jsonQuiz } })}*/}
 
-        <button
-          onClick={loadJsonFromFile}
-          className="bg-blue-500 text-white p-2 rounded-md"
-        >
-          Revisar
-        </button>
+        {jsonQuiz?.questions?.length > 0 && (
+          <button
+            onClick={loadJsonFromFile}
+            className="bg-blue-500 text-white p-2 rounded-md"
+          >
+            Revisar
+          </button>
+        )}
       </div>
     </div>
   );

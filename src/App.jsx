@@ -27,7 +27,6 @@ function App() {
       <TaskContextProvider>
         <Routes>
           <Route path="/" element={<Home />}>
-            <Route path="/restfull" element={<Restfull />} />
             <Route path="/tables" element={<Tables />} />
             <Route path="/tables_modules/:id" element={<Tables_Modules />} />
             <Route path="/modules_quizzes/:id" element={<Modules_Quizzes />} />
