@@ -2,13 +2,56 @@
 @import "tailwindcss";
 @import "tailwindcss/utilities";
 
-:root {
+body {
   margin: 0;
   padding: 0;
   font-family: Play, sans-serif;
-  color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #213547;
+
+  --blackPurple: #150016;
+  --deepPurple: #29104A;
+  --purple: #522C5D;
+  --white: #FFE3D8;
+  --white-100: #edd2c7;
+  --royalPurple: #76007C;
+  --darkPurple: #281845;
+  --mediumPurple: #512A80;
+  --lightPurple: #8A52C3;
+
+  --gradient: linear-gradient(to bottom right, #46009b, #bc8ceb);
+}
+
+/*THEME COLORS FOR BACKGROUND*/
+.blackPurple-bg{
+  background-color: var(--blackPurple);
+}
+.deepPurple-bg {
+  background-color: var(--deepPurple);
+}
+.purple-bg {
+  background-color: var(--purple);
+}
+.white-bg {
+  background-color: var(--white);
+}
+.white-100{
+  background-color: var(--white-100);
+}
+.royalPurple {
+  background-color: var(--royalPurple);
+}
+.darkPurple-bg{
+  background-color: var(--darkPurple);
+}
+.mediumPurple-bg{
+  background-color: var(--mediumPurple);
+}
+.lightPurple-bg {
+  background-color: var(--lightPurple);
+}
+.gradient-bg{
+  background: var(--gradient);
 }
 
 .login-container {
@@ -19,27 +62,18 @@
   height: 100vh;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  width: fit-content;
-  margin: 0;
-  display: flex;
-  place-items: center;
-}
-
-.gradient-bg {
-  background: linear-gradient(to bottom right, #46009b, #bc8ceb);
-  min-height: 100vh;
+.login-img-bg {
+  background-image: url('src/assets/login-bg.jpg');
   background-size: cover;
-  background-attachment: fixed;
+  position: relative;
+}
+
+.overlay-gradient {
+  border-width: 10px;
+  border-style: solid;
+  border-image-source: linear-gradient(to bottom right, rgba(188, 140, 235, 0.85), rgba(70, 0, 155, 1));
+  border-image-slice: fill 1;
+
 }
 
 /*button {
@@ -67,10 +101,12 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
-  button {
+
+  /*button {
     background-color: #f9f9f9;
-  }
+  }*/
 }

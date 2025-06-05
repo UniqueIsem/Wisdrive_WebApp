@@ -1,0 +1,85 @@
+{
+  "category":"Reglamentos de tránsito",
+  "quiz": [
+    {
+      "question": "¿Cuál es la edad mínima para obtener una licencia de conducir en Benito Juárez?",
+      "correct_answer": "18 años",
+      "incorrect_answers": [
+        "16 años",
+        "21 años"
+      ]
+    },
+    {
+      "question": "¿Qué documento se debe presentar para comprobar la identidad al solicitar una licencia?",
+      "correct_answer": "Identificación oficial con fotografía",
+      "incorrect_answers": [
+        "Comprobante de ingresos",
+        "Certificado de estudios"
+      ]
+    },
+    {
+      "question": "¿Qué examen deben aprobar los solicitantes de una licencia de conducir?",
+      "correct_answer": "Examen teórico y práctico",
+      "incorrect_answers": [
+        "Examen de salud",
+        "Examen de antecedentes penales"
+      ]
+    },
+    {
+      "question": "¿Qué tipo de licencia se expide a los conductores de vehículos que no prestan servicio público?",
+      "correct_answer": "Licencia tipo 'B'",
+      "incorrect_answers": [
+        "Licencia tipo 'A'",
+        "Licencia tipo 'C'"
+      ]
+    },
+    {
+      "question": "¿Qué deben hacer los conductores al salir de una vía principal?",
+      "correct_answer": "Pasar con suficiente anticipación al carril de su extrema derecha",
+      "incorrect_answers": [
+        "Acelerar para salir rápidamente",
+        "Cambiar de carril sin señalizar"
+      ]
+    },
+    {
+      "question": "¿Qué se debe presentar como comprobante de domicilio al solicitar una licencia?",
+      "correct_answer": "Comprobante de domicilio actual o hasta con tres meses de antigüedad",
+      "incorrect_answers": [
+        "Recibo de teléfono fijo",
+        "Factura de servicios públicos"
+      ]
+    },
+    {
+      "question": "¿Qué porcentaje de descuento tienen las personas mayores de 60 años en los pagos de licencia?",
+      "correct_answer": "50%",
+      "incorrect_answers": [
+        "25%",
+        "75%"
+      ]
+    },
+    {
+      "question": "¿Qué deben hacer los conductores al ceder el paso a peatones?",
+      "correct_answer": "Ceder el paso cuando deban cruzar la acera",
+      "incorrect_answers": [
+        "Acelerar para pasar primero",
+        "Ignorar a los peatones"
+      ]
+    },
+    {
+      "question": "¿Qué tipo de vehículos requieren una licencia tipo 'D'?",
+      "correct_answer": "Vehículos que presten servicio público de pasajeros",
+      "incorrect_answers": [
+        "Vehículos particulares",
+        "Motocicletas"
+      ]
+    },
+    {
+      "question": "¿Qué se debe hacer al conducir en una zona de seguridad para peatones?",
+      "correct_answer": "Evitar conducir en esa zona",
+      "incorrect_answers": [
+        "Acelerar para pasar rápidamente",
+        "Detenerse solo si hay peatones"
+      ]
+    }
+  ]
+}
