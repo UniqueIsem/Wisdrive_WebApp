@@ -3,10 +3,9 @@ import { useLocation } from "react-router-dom";
 import { supabase } from "../../supabase/client";
 import { EditableInput } from "../ui/EditableInput";
 
-export function Upload_Generated() {
+export function CreateOrUploadQuizz() {
   const location = useLocation();
   const quizDataFromState = location.state?.quizData || null;
-  const [recordCategory, setRecordCategory] = useState(null);
 
   const [formData, setFormData] = useState({
     category: "",
@@ -74,38 +73,19 @@ export function Upload_Generated() {
 
       const { data: categoryData, error: categoryError } = await supabase
         .from("categories")
-        .select("name")
-        .eq("name", category)
+        .select("id")
+        .eq("id", category)
         .single();
-      console.log(categoryData);
-      setRecordCategory(categoryData.id);
       if (categoryError || !categoryData)
         throw new Error("Categoría no encontrada.");
 
-      // 1. Buscar el módulo por nombre
-      let { data: moduleData, error: moduleError } = await supabase
+      const { data: moduleData, error: moduleError } = await supabase
         .from("modules")
         .select("id")
-        .eq("module_name", module)
-        .eq("category_id", setRecordCategory)
+        .eq("id", module)
+        .eq("category_id", categoryData.id)
         .single();
-
-      // 2. Si no existe, crearlo
-      if (moduleError || !moduleData) {
-        console.log(module);
-        const { data: newModule, error: insertError } = await supabase
-          .from("modules")
-          .insert([{ module_name: module, category_id: categoryData.id }])
-          .select("id")
-          .single();
-
-        if (insertError || !newModule) {
-          console.log(module);
-          throw new Error("No se pudo crear el módulo.");
-        }
-
-        moduleData = newModule; // Usa el nuevo módulo
-      }
+      if (moduleError || !moduleData) throw new Error("Módulo no encontrado.");
 
       const { data: newQuiz, error: quizError } = await supabase
         .from("quizzes")
@@ -143,7 +123,7 @@ export function Upload_Generated() {
   };
 
   return (
-    <div className="bg-purple-100 p-6 h-max-full w-full mx-auto space-x-4">
+    <div className="bg-purple-100 p-6 h-full h-max-full w-full mx-auto space-x-4">
       <h2 className="text-lg font-bold text-purple-800">Crear o Subir Quiz</h2>
 
       <div className="bg-white p-4 rounded shadow text-gray-700">
@@ -182,7 +162,7 @@ export function Upload_Generated() {
 
       <button
         onClick={handleSubmit}
-        className="mt-4 bg-purple-600 text-white px-4 py-2 mb-5 rounded hover:bg-green-700 justify-self-stretch"
+        className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
       >
         Guardar Quiz
       </button>

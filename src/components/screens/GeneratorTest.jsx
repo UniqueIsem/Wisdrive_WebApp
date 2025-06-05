@@ -264,7 +264,7 @@ export function GeneratorTest() {
           </Button>
         </div>
 
-        {answer && (
+        {/*{answer && (
           <div className="mt-4 p-4 bg-gray-100 rounded-lg whitespace-pre-wrap text-gray-800">
             {answer}
           </div>

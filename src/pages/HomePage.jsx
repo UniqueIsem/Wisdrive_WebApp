@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { supabase } from "../supabase/client";
 import Navbar from "../components/Navbar";
+import Dashboard from "../components/ui/Dashboard";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -36,6 +37,8 @@ function HomePage() {
     <div className="flex h-screen w-auto">
       <Navbar />
       <div className="w-4/5 ml-[20%]">
+        {/**aqui empiezan las graficas locas 
+        <Dashboard />*/}
         <Outlet />
       </div>
     </div>

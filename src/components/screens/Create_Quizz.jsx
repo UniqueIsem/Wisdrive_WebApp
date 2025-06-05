@@ -193,7 +193,7 @@ export function Create_Quizz() {
   return (
     <div className="flex flex-col h-max-full bg-purple-100 p-8 text-gray-600">
       <div className="flex flex-col gap-10 max-w-full w-full h-full">
-        <h2 className="text-xl font-semibold text-gray-600">Crear Pregunta</h2>
+        <h2 className="text-xl font-semibold text-gray-600">Crear Quizz</h2>
         <div className="flex justify-between">
           <p>Categoría</p>
           <select name="category" onChange={handleChange}>
@@ -273,7 +273,7 @@ export function Create_Quizz() {
           onClick={handleSubmit}
           className="mt-4 w-full bg-purple-600 text-white rounded-md py-2 hover:bg-purple-700"
         >
-          Guardar Pregunta
+          Guardar Quiz
         </button>
       </div>
     </div>

@@ -49,23 +49,30 @@ export function Videos_Management() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-purple-100 p-8 ">
+    <div className="flex flex-col h-max-full w-full mx-auto bg-purple-100 p-8 ">
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">
         Recursos del módulo Mecánica
       </h1>
-      <div className="max-w-full w-full h-full justify-between items-center">
+      <div className="max-w-full w-full h-full">
         {videos.map((video) => (
           <div
             key={video.id}
-            className="bg-white w-full p-4 mb-4 rounded-lg shadow flex gap-2"
+            className="bg-white w-full p-4 mb-4 rounded-lg shadow flex justify-between items-center"
           >
-            <p className="text-gray-700">{video.name}</p>
-            <a
-              href={video.url_path}
-              className="text-gray-700 mt-10 text-center"
-            >
-              {video.url_path}
-            </a>
+            {/* Contenedor izquierdo: nombre y link */}
+            <div className="flex flex-col">
+              <p className="text-gray-700">{video.name}</p>
+              <a
+                href={video.url_path}
+                className="text-blue-600 hover:underline break-all"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {video.url_path}
+              </a>
+            </div>
+
+            {/* Botón a la derecha */}
             <button
               className="cursor-pointer"
               onClick={() => handleDeleteLink(video.id)}
